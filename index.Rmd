@@ -1,6 +1,6 @@
 ---
 title: "Gov 50 Final Project"
-author: "Your Name Here"
+author: "Faith Oji"
 description: "My final project"
 output:
   distill::distill_article:
@@ -11,4 +11,4 @@ output:
 
 ## Project thoughts
 
-I am interested in exploring data related to...
+Honestly, I'm not exactly sure what I want my final project to be about quite yet. I have a lot of interests in the lasting effects of slavery on systematic racism in the united states, as well as how family histories (in relation to the Slave Trade) influence political activity today. I'm not yet sure, though, about how I would tie this in to my final project. I'd also be interested in how immigration rates affect different aspects in our system. I also potentially could do a project on the prison systems and abolition. I'm just not sure yet what direction I want to go in or how I'd go in that direction.

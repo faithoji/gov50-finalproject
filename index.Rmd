@@ -1,7 +1,7 @@
 ---
 title: "Gov 50 Final Project"
 author: "Faith Oji"
-description: "My final project"
+description: "Race's Role in Romance"
 output:
   distill::distill_article:
     self_contained: false
@@ -18,3 +18,44 @@ Honestly, I'm not exactly sure what I want my final project to be about quite ye
 Upon further research, I've decided to completely change the course of my project. I've decided, instead, to do a project surrounding marriage, specifically pulling from a data set in relation to a study called 'Marriage is Not Dead'. My research question is whether or not race has an impact on tendency towards marriage. My hypothesis is that, throughout the years, Black People in America will have the highest proportion of individuals that have never been married. This hypothesis stems from a few points, with the main one being the effect of systematic racism in the United States. It's common knowledge that marriage is very expensive. However, the systems within this country make it disproportionately harder for Black People to acquire and maintain large amounts of wealth, and as such, they would be less likely to take on the financial burden of a wedding. There is also the factor of the prison systems breaking up Black families, which would also contribute to a lower marriage rate. 
 
 My explanatory variables of interest are 'White', 'Black', and 'Hisp', which represent White People, Black or African-American People, and Hispanic People, respectively. These are all different races. The outcome variable of interest would be the proportion of the population that is unmarried per year. This was measured through the survey data, and the trend could be noted through a line graph. An observed pattern in the data that would support this hypothesis would be whether or not the proportion of unmarried Black People was significantly higher than the other races, as well as the overall proportion of unmarried individuals throughout the years. My hypothesis would be disproved if the proportions were similar amongst all the populations, or if a different race had a significantly higher proportion of unmarried individuals. 
+
+Below is a link to the original dataset. 
+https://github.com/fivethirtyeight/data/blob/master/marriage/both_sexes.csv
+
+## Milestone Three
+
+```{r}
+library(tidyverse)
+
+both_sexes <- read_csv("both_sexes.csv")
+
+both_sexes
+```
+
+```{r}
+
+race_compiled <- both_sexes |>
+  select(year, Black_2534, Black_3544, Black_4554, Hisp_2534, Hisp_3544, Hisp_4554, White_2534, White_3544, White_4554)|>
+  group_by(year)|>
+  mutate(Black = (Black_2534+ Black_3544+ Black_4554)/3,
+         Hispanic = (Hisp_2534+ Hisp_3544+ Hisp_4554)/3,
+         White = (White_2534+ White_3544+ White_4554)/3,)|>
+  select(year, Black, White, Hispanic) 
+
+race_compiled
+```
+
+```{r}
+race_graph <- race_compiled|>
+  ggplot(aes(x = year))+
+  geom_line(aes(y= Black, colour = "deeppink1"))+
+  geom_line(aes(y= White, colour = "deepskyblue1"))+
+  geom_line(aes(y= Hispanic, colour = "darkorchid1"))+
+  labs(title = "Unmarried Population over the Years",
+       x = "Year",
+       y = "Proportion of Unmarried Population",
+       colour = "Legend")
+
+race_graph
+```
+The above graph is the current version of my data visualisation. The three lines correspond with each of th races involved in the study (Black, White, and Hispanic). Though the current legend doesn't include accurate labels, the green line corresponds with the Black population, the red line corresponds with the Hispanic population, and the blue line corresponds with the White population. In future versions of the visualisation, I hope to figure out what's causing the lines to be mislabeled in the legend. However, the data shows an interesting trend that seems to prove the hypothesis that that Black populations have far higher proportions of unmarried people within the populations. It also highlights an upward trend in the unmarried proportion across all populations.  

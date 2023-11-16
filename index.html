@@ -1597,22 +1597,177 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>race_graph</span> <span class='op'>&lt;-</span> <span class='va'>race_compiled</span><span class='op'>|&gt;</span></span>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span></span>
+<span><span class='va'>race_graph</span> <span class='op'>&lt;-</span> <span class='va'>race_compiled</span><span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>year</span><span class='op'>)</span><span class='op'>)</span><span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>y<span class='op'>=</span> <span class='va'>Black</span>, colour <span class='op'>=</span> <span class='st'>"deeppink1"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>y<span class='op'>=</span> <span class='va'>White</span>, colour <span class='op'>=</span> <span class='st'>"deepskyblue1"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>y<span class='op'>=</span> <span class='va'>Hispanic</span>, colour <span class='op'>=</span> <span class='st'>"darkorchid1"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>y<span class='op'>=</span> <span class='va'>Black</span>, colour <span class='op'>=</span> <span class='st'>"Black"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>y<span class='op'>=</span> <span class='va'>White</span>, colour <span class='op'>=</span> <span class='st'>"White"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>y<span class='op'>=</span> <span class='va'>Hispanic</span>, colour <span class='op'>=</span> <span class='st'>"Hispanic"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Unmarried Population over the Years"</span>,</span>
 <span>       x <span class='op'>=</span> <span class='st'>"Year"</span>,</span>
 <span>       y <span class='op'>=</span> <span class='st'>"Proportion of Unmarried Population"</span>,</span>
-<span>       colour <span class='op'>=</span> <span class='st'>"Legend"</span><span class='op'>)</span></span>
+<span>       colour <span class='op'>=</span> <span class='st'>"Legend"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_manual.html'>scale_color_manual</a></span><span class='op'>(</span>name <span class='op'>=</span> <span class='st'>"Race"</span>, values<span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Black"</span><span class='op'>=</span> <span class='st'>"deeppink1"</span>, <span class='st'>"White"</span><span class='op'>=</span> <span class='st'>"deepskyblue1"</span>, <span class='st'>"Hispanic"</span><span class='op'>=</span> <span class='st'>"darkorchid1"</span><span class='op'>)</span><span class='op'>)</span></span>
 <span></span>
 <span><span class='va'>race_graph</span></span></code></pre>
 </div>
 <p><img src="index_files/figure-html5/unnamed-chunk-3-1.png" width="624" /></p>
 </div>
-<p>The above graph is the current version of my data visualisation. The three lines correspond with each of th races involved in the study (Black, White, and Hispanic). Though the current legend doesn’t include accurate labels, the green line corresponds with the Black population, the red line corresponds with the Hispanic population, and the blue line corresponds with the White population. In future versions of the visualisation, I hope to figure out what’s causing the lines to be mislabeled in the legend. However, the data shows an interesting trend that seems to prove the hypothesis that that Black populations have far higher proportions of unmarried people within the populations. It also highlights an upward trend in the unmarried proportion across all populations.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p>The above graph is the current version of my data visualisation. The three lines correspond with each of the races involved in the study (Black, White, and Hispanic). Though the current legend doesn’t include accurate labels, the green line corresponds with the Black population, the red line corresponds with the Hispanic population, and the blue line corresponds with the White population. In future versions of the visualisation, I hope to figure out what’s causing the lines to be mislabeled in the legend. However, the data shows an interesting trend that seems to prove the hypothesis that that Black populations have far higher proportions of unmarried people within the populations. It also highlights an upward trend in the unmarried proportion across all populations.</p>
+<p>###Milestone Four</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>race_compiled</span> <span class='op'>&lt;-</span> <span class='va'>both_sexes</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>year</span>, <span class='va'>Black_2534</span>, <span class='va'>Black_3544</span>, <span class='va'>Black_4554</span>, <span class='va'>Hisp_2534</span>, <span class='va'>Hisp_3544</span>, <span class='va'>Hisp_4554</span>, <span class='va'>White_2534</span>, <span class='va'>White_3544</span>, <span class='va'>White_4554</span><span class='op'>)</span><span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>year</span><span class='op'>)</span><span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>Black <span class='op'>=</span> <span class='op'>(</span><span class='va'>Black_2534</span><span class='op'>+</span> <span class='va'>Black_3544</span><span class='op'>+</span> <span class='va'>Black_4554</span><span class='op'>)</span><span class='op'>/</span><span class='fl'>3</span>,</span>
+<span>         Hispanic <span class='op'>=</span> <span class='op'>(</span><span class='va'>Hisp_2534</span><span class='op'>+</span> <span class='va'>Hisp_3544</span><span class='op'>+</span> <span class='va'>Hisp_4554</span><span class='op'>)</span><span class='op'>/</span><span class='fl'>3</span>,</span>
+<span>         White <span class='op'>=</span> <span class='op'>(</span><span class='va'>White_2534</span><span class='op'>+</span> <span class='va'>White_3544</span><span class='op'>+</span> <span class='va'>White_4554</span><span class='op'>)</span><span class='op'>/</span><span class='fl'>3</span>,<span class='op'>)</span><span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>year</span>, <span class='va'>Black</span>, <span class='va'>White</span>, <span class='va'>Hispanic</span><span class='op'>)</span> </span>
+<span></span>
+<span><span class='va'>race_compiled</span></span></code></pre>
+</div>
+<pre><code># A tibble: 17 × 4
+# Groups:   year [17]
+    year Black  White Hispanic
+   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
+ 1  1960 0.107 0.0857   0.0929
+ 2  1970 0.122 0.0793   0.0862
+ 3  1980 0.177 0.0966   0.112 
+ 4  1990 0.273 0.137    0.165 
+ 5  2000 0.331 0.174    0.189 
+ 6  2001 0.345 0.175    0.192 
+ 7  2002 0.347 0.178    0.196 
+ 8  2003 0.362 0.181    0.197 
+ 9  2004 0.366 0.185    0.206 
+10  2005 0.373 0.193    0.210 
+11  2006 0.412 0.212    0.235 
+12  2007 0.419 0.217    0.244 
+13  2008 0.430 0.224    0.256 
+14  2009 0.442 0.234    0.270 
+15  2010 0.447 0.238    0.275 
+16  2011 0.457 0.244    0.285 
+17  2012 0.459 0.249    0.290 </code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>race_compiled</span>, digits <span class='op'>=</span> <span class='fl'>2</span>, col.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Year"</span>, <span class='st'>"Black Population"</span>, <span class='st'>"White Population"</span>, <span class='st'>"Hispanic Population"</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
+</div>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Year</th>
+<th style="text-align: right;">Black Population</th>
+<th style="text-align: right;">White Population</th>
+<th style="text-align: right;">Hispanic Population</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1960</td>
+<td style="text-align: right;">0.11</td>
+<td style="text-align: right;">0.09</td>
+<td style="text-align: right;">0.09</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1970</td>
+<td style="text-align: right;">0.12</td>
+<td style="text-align: right;">0.08</td>
+<td style="text-align: right;">0.09</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1980</td>
+<td style="text-align: right;">0.18</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.11</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1990</td>
+<td style="text-align: right;">0.27</td>
+<td style="text-align: right;">0.14</td>
+<td style="text-align: right;">0.16</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">0.33</td>
+<td style="text-align: right;">0.17</td>
+<td style="text-align: right;">0.19</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2001</td>
+<td style="text-align: right;">0.34</td>
+<td style="text-align: right;">0.18</td>
+<td style="text-align: right;">0.19</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2002</td>
+<td style="text-align: right;">0.35</td>
+<td style="text-align: right;">0.18</td>
+<td style="text-align: right;">0.20</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2003</td>
+<td style="text-align: right;">0.36</td>
+<td style="text-align: right;">0.18</td>
+<td style="text-align: right;">0.20</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2004</td>
+<td style="text-align: right;">0.37</td>
+<td style="text-align: right;">0.19</td>
+<td style="text-align: right;">0.21</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2005</td>
+<td style="text-align: right;">0.37</td>
+<td style="text-align: right;">0.19</td>
+<td style="text-align: right;">0.21</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2006</td>
+<td style="text-align: right;">0.41</td>
+<td style="text-align: right;">0.21</td>
+<td style="text-align: right;">0.24</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2007</td>
+<td style="text-align: right;">0.42</td>
+<td style="text-align: right;">0.22</td>
+<td style="text-align: right;">0.24</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2008</td>
+<td style="text-align: right;">0.43</td>
+<td style="text-align: right;">0.22</td>
+<td style="text-align: right;">0.26</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2009</td>
+<td style="text-align: right;">0.44</td>
+<td style="text-align: right;">0.23</td>
+<td style="text-align: right;">0.27</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2010</td>
+<td style="text-align: right;">0.45</td>
+<td style="text-align: right;">0.24</td>
+<td style="text-align: right;">0.27</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2011</td>
+<td style="text-align: right;">0.46</td>
+<td style="text-align: right;">0.24</td>
+<td style="text-align: right;">0.28</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2012</td>
+<td style="text-align: right;">0.46</td>
+<td style="text-align: right;">0.25</td>
+<td style="text-align: right;">0.29</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>This table is a neat visualisation of the numerical proportions of the unmarried populations over the years. Through this table, it is even easier to note how the Black populations have a drastically larger proportion of unmarried individuals over the years, and over generations, which alludes to the lasting effects of inequality across generations. Additionally, the visualisation from Milestone Three has been updated to include proper labels for the different lines</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

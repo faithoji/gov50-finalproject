@@ -46,16 +46,38 @@ race_compiled
 ```
 
 ```{r}
+library(ggplot2)
 race_graph <- race_compiled|>
   ggplot(aes(x = year))+
-  geom_line(aes(y= Black, colour = "deeppink1"))+
-  geom_line(aes(y= White, colour = "deepskyblue1"))+
-  geom_line(aes(y= Hispanic, colour = "darkorchid1"))+
+  geom_line(aes(y= Black, colour = "Black"))+
+  geom_line(aes(y= White, colour = "White"))+
+  geom_line(aes(y= Hispanic, colour = "Hispanic"))+
   labs(title = "Unmarried Population over the Years",
        x = "Year",
        y = "Proportion of Unmarried Population",
-       colour = "Legend")
+       colour = "Legend") +
+  scale_color_manual(name = "Race", values= c("Black"= "deeppink1", "White"= "deepskyblue1", "Hispanic"= "darkorchid1"))
 
 race_graph
 ```
-The above graph is the current version of my data visualisation. The three lines correspond with each of th races involved in the study (Black, White, and Hispanic). Though the current legend doesn't include accurate labels, the green line corresponds with the Black population, the red line corresponds with the Hispanic population, and the blue line corresponds with the White population. In future versions of the visualisation, I hope to figure out what's causing the lines to be mislabeled in the legend. However, the data shows an interesting trend that seems to prove the hypothesis that that Black populations have far higher proportions of unmarried people within the populations. It also highlights an upward trend in the unmarried proportion across all populations.  
+The above graph is the current version of my data visualisation. The three lines correspond with each of the races involved in the study (Black, White, and Hispanic). Though the current legend doesn't include accurate labels, the green line corresponds with the Black population, the red line corresponds with the Hispanic population, and the blue line corresponds with the White population. In future versions of the visualisation, I hope to figure out what's causing the lines to be mislabeled in the legend. However, the data shows an interesting trend that seems to prove the hypothesis that that Black populations have far higher proportions of unmarried people within the populations. It also highlights an upward trend in the unmarried proportion across all populations.  
+
+
+###Milestone Four
+
+```{r}
+race_compiled <- both_sexes |>
+  select(year, Black_2534, Black_3544, Black_4554, Hisp_2534, Hisp_3544, Hisp_4554, White_2534, White_3544, White_4554)|>
+  group_by(year)|>
+  mutate(Black = (Black_2534+ Black_3544+ Black_4554)/3,
+         Hispanic = (Hisp_2534+ Hisp_3544+ Hisp_4554)/3,
+         White = (White_2534+ White_3544+ White_4554)/3,)|>
+  select(year, Black, White, Hispanic) 
+
+race_compiled
+
+knitr::kable(race_compiled, digits = 2, col.names = c("Year", "Black Population", "White Population", "Hispanic Population"))
+
+```
+
+This table is a neat visualisation of the numerical proportions of the unmarried populations over the years. Through this table, it is even easier to note how the Black populations have a drastically larger proportion of unmarried individuals over the years, and over generations, which alludes to the lasting effects of inequality across generations. Additionally, the visualisation from Milestone Three has been updated to include proper labels for the different lines

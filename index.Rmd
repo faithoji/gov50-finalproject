@@ -52,7 +52,7 @@ race_graph <- race_compiled|>
   geom_line(aes(y= Black, colour = "Black"))+
   geom_line(aes(y= White, colour = "White"))+
   geom_line(aes(y= Hispanic, colour = "Hispanic"))+
-  labs(title = "Unmarried Population over the Years",
+  labs(title = "Unmarried Population Over The Years",
        x = "Year",
        y = "Proportion of Unmarried Population",
        colour = "Legend") +
@@ -80,4 +80,41 @@ knitr::kable(race_compiled, digits = 2, col.names = c("Year", "Black Population"
 
 ```
 
-This table is a neat visualisation of the numerical proportions of the unmarried populations over the years. Through this table, it is even easier to note how the Black populations have a drastically larger proportion of unmarried individuals over the years, and over generations, which alludes to the lasting effects of inequality across generations. Additionally, the visualisation from Milestone Three has been updated to include proper labels for the different lines
+This table is a neat visualisation of the numerical proportions of the unmarried populations over the years. Through this table, it is even easier to note how the Black populations have a drastically larger proportion of unmarried individuals over the years, and over generations, which alludes to the lasting effects of inequality across generations. Additionally, the visualisation from Milestone Three has been updated to include proper labels for the different lines.
+
+## Introduction
+
+For this project, I decided to explore data relating to marriage rates in America since the 1960s. I specifically wanted to explore the link between the race of American citizens and the effect that that may have on the proportion of the unmarried people within those subsets of the population. I chose this topic because, to be honest, the idea of marriage has always been one that has interested me, specifically the disparities that I had noticed amongst different groups surrounding the perception of how much of their population had found traditional marriages compared to other types of relationships. I wanted to see if these stereotypes had any statistical backing.
+
+My research question in this case was whether or not race had an impact on the percentage of a population that remained married. If so, which racial group would have the highest proportion of unmarried individuals? My hypothesis was based in the idea that marriage is a luxury, and since its foundations, the systems in America have largely prevented Black Americans from experiencing much luxury. As such, my hypothesis is that there would be a notable difference in the proportion of the unmarried population, with Black Americans having the largest proportion throughout the years.
+
+To support my hypothesis, my visualisations would have to show two things. First, it would have to show a large gap between the proportions of unmarried populations across the three racial groups identified: White, Hispanic, and Black. This is because, without an initial notable difference in the proportions, there would be no need to further analyse the data. Secondly, and more importantly, there would have to be an identifiable difference between the proportion of the Black unmarried population in comparison to those of the other two racial groups. If there were no initial difference, my hypothesis would have to be proven false. Additionally, if a different racial group had a noticeably higher proportion of unmarried individuals, my hypothesis would have to be proven false. 
+
+## Data and Research Method
+
+In this project, I had to modify my data set in order to solely show my variables of interest. Originally, the dataset included additional information, such as the region of the individuals, the level of education, employment history, economic status, and the presence of children within the home. While these are important variables that may have an effect on the marruage rates, for the purpose of my project, I wanted to primarily focus on the effect of race on long-term relationships. Additionally, the original data set separated each racial subgroup into three different subgroups, based on age. Because I'm interested in the effects across the whole population, not just by age group, I had to modify the dataset once again to find the means of each of these separations. I pulled the necessary information out of the originsl dataset, 'both_sexes', and compiled it into my unique dataset, 'race_compiled'
+
+# Original Data Set
+```{r}
+library(tidyverse)
+
+both_sexes <- read_csv("both_sexes.csv")
+
+both_sexes
+```
+
+# Modified Data Set
+```{r}
+
+race_compiled <- both_sexes |>
+  select(year, Black_2534, Black_3544, Black_4554, Hisp_2534, Hisp_3544, Hisp_4554, White_2534, White_3544, White_4554)|>
+  group_by(year)|>
+  mutate(Black = (Black_2534+ Black_3544+ Black_4554)/3,
+         Hispanic = (Hisp_2534+ Hisp_3544+ Hisp_4554)/3,
+         White = (White_2534+ White_3544+ White_4554)/3,)|>
+  select(year, Black, White, Hispanic) 
+
+race_compiled
+```
+
+As you can see, the modified dataset focuses on the year the data was collected and has three additional colums: "Black", "White", and "Hispanic". I calculated these columns using the original data. For the "Black" column, I found the sum of the proportion of unmarried individuals in each age range (25-34, 35-44, 45-54), and then divided that number by three. I followed the same process for each of the subsequent racial columns as well. 

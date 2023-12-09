@@ -1603,7 +1603,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>y<span class='op'>=</span> <span class='va'>Black</span>, colour <span class='op'>=</span> <span class='st'>"Black"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>y<span class='op'>=</span> <span class='va'>White</span>, colour <span class='op'>=</span> <span class='st'>"White"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>y<span class='op'>=</span> <span class='va'>Hispanic</span>, colour <span class='op'>=</span> <span class='st'>"Hispanic"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Unmarried Population over the Years"</span>,</span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Unmarried Population Over The Years"</span>,</span>
 <span>       x <span class='op'>=</span> <span class='st'>"Year"</span>,</span>
 <span>       y <span class='op'>=</span> <span class='st'>"Proportion of Unmarried Population"</span>,</span>
 <span>       colour <span class='op'>=</span> <span class='st'>"Legend"</span><span class='op'>)</span> <span class='op'>+</span></span>
@@ -1766,8 +1766,87 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </tbody>
 </table>
 </div>
-<p>This table is a neat visualisation of the numerical proportions of the unmarried populations over the years. Through this table, it is even easier to note how the Black populations have a drastically larger proportion of unmarried individuals over the years, and over generations, which alludes to the lasting effects of inequality across generations. Additionally, the visualisation from Milestone Three has been updated to include proper labels for the different lines</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p>This table is a neat visualisation of the numerical proportions of the unmarried populations over the years. Through this table, it is even easier to note how the Black populations have a drastically larger proportion of unmarried individuals over the years, and over generations, which alludes to the lasting effects of inequality across generations. Additionally, the visualisation from Milestone Three has been updated to include proper labels for the different lines.</p>
+<h2 id="introduction">Introduction</h2>
+<p>For this project, I decided to explore data relating to marriage rates in America since the 1960s. I specifically wanted to explore the link between the race of American citizens and the effect that that may have on the proportion of the unmarried people within those subsets of the population. I chose this topic because, to be honest, the idea of marriage has always been one that has interested me, specifically the disparities that I had noticed amongst different groups surrounding the perception of how much of their population had found traditional marriages compared to other types of relationships. I wanted to see if these stereotypes had any statistical backing.</p>
+<p>My research question in this case was whether or not race had an impact on the percentage of a population that remained married. If so, which racial group would have the highest proportion of unmarried individuals? My hypothesis was based in the idea that marriage is a luxury, and since its foundations, the systems in America have largely prevented Black Americans from experiencing much luxury. As such, my hypothesis is that there would be a notable difference in the proportion of the unmarried population, with Black Americans having the largest proportion throughout the years.</p>
+<p>To support my hypothesis, my visualisations would have to show two things. First, it would have to show a large gap between the proportions of unmarried populations across the three racial groups identified: White, Hispanic, and Black. This is because, without an initial notable difference in the proportions, there would be no need to further analyse the data. Secondly, and more importantly, there would have to be an identifiable difference between the proportion of the Black unmarried population in comparison to those of the other two racial groups. If there were no initial difference, my hypothesis would have to be proven false. Additionally, if a different racial group had a noticeably higher proportion of unmarried individuals, my hypothesis would have to be proven false.</p>
+<h2 id="data-and-research-method">Data and Research Method</h2>
+<p>In this project, I had to modify my data set in order to solely show my variables of interest. Originally, the dataset included additional information, such as the region of the individuals, the level of education, employment history, economic status, and the presence of children within the home. While these are important variables that may have an effect on the marruage rates, for the purpose of my project, I wanted to primarily focus on the effect of race on long-term relationships. Additionally, the original data set separated each racial subgroup into three different subgroups, based on age. Because I’m interested in the effects across the whole population, not just by age group, I had to modify the dataset once again to find the means of each of these separations. I pulled the necessary information out of the originsl dataset, ‘both_sexes’, and compiled it into my unique dataset, ‘race_compiled’</p>
+<h1 id="original-data-set">Original Data Set</h1>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>both_sexes</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"both_sexes.csv"</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>both_sexes</span></span></code></pre>
+</div>
+<pre><code># A tibble: 17 × 75
+    ...1  year date       all_2534 HS_2534 SC_2534 BAp_2534 BAo_2534
+   &lt;dbl&gt; &lt;dbl&gt; &lt;date&gt;        &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+ 1     1  1960 1960-01-01    0.123   0.110   0.152    0.239    0.239
+ 2     2  1970 1970-01-01    0.127   0.109   0.150    0.219    0.219
+ 3     3  1980 1980-01-01    0.199   0.162   0.224    0.288    0.288
+ 4     4  1990 1990-01-01    0.297   0.278   0.278    0.361    0.366
+ 5     5  2000 2000-01-01    0.345   0.332   0.325    0.387    0.394
+ 6     6  2001 2001-01-01    0.353   0.345   0.334    0.384    0.393
+ 7     7  2002 2002-01-01    0.354   0.349   0.336    0.377    0.387
+ 8     8  2003 2003-01-01    0.362   0.358   0.342    0.387    0.400
+ 9     9  2004 2004-01-01    0.367   0.371   0.345    0.385    0.398
+10    10  2005 2005-01-01    0.379   0.387   0.360    0.389    0.403
+11    11  2006 2006-01-01    0.415   0.431   0.391    0.415    0.430
+12    12  2007 2007-01-01    0.427   0.444   0.408    0.421    0.439
+13    13  2008 2008-01-01    0.439   0.460   0.424    0.430    0.447
+14    14  2009 2009-01-01    0.463   0.485   0.447    0.452    0.474
+15    15  2010 2010-01-01    0.470   0.494   0.454    0.456    0.477
+16    16  2011 2011-01-01    0.483   0.512   0.469    0.466    0.490
+17    17  2012 2012-01-01    0.494   0.524   0.480    0.477    0.502
+# ℹ 67 more variables: GD_2534 &lt;dbl&gt;, White_2534 &lt;dbl&gt;,
+#   Black_2534 &lt;dbl&gt;, Hisp_2534 &lt;dbl&gt;, NE_2534 &lt;dbl&gt;, MA_2534 &lt;dbl&gt;,
+#   Midwest_2534 &lt;dbl&gt;, South_2534 &lt;dbl&gt;, Mountain_2534 &lt;dbl&gt;,
+#   Pacific_2534 &lt;dbl&gt;, poor_2534 &lt;dbl&gt;, mid_2534 &lt;dbl&gt;,
+#   rich_2534 &lt;dbl&gt;, all_3544 &lt;dbl&gt;, HS_3544 &lt;dbl&gt;, SC_3544 &lt;dbl&gt;,
+#   BAp_3544 &lt;dbl&gt;, BAo_3544 &lt;dbl&gt;, GD_3544 &lt;dbl&gt;, White_3544 &lt;dbl&gt;,
+#   Black_3544 &lt;dbl&gt;, Hisp_3544 &lt;dbl&gt;, NE_3544 &lt;dbl&gt;, …</code></pre>
+</div>
+<h1 id="modified-data-set">Modified Data Set</h1>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>race_compiled</span> <span class='op'>&lt;-</span> <span class='va'>both_sexes</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>year</span>, <span class='va'>Black_2534</span>, <span class='va'>Black_3544</span>, <span class='va'>Black_4554</span>, <span class='va'>Hisp_2534</span>, <span class='va'>Hisp_3544</span>, <span class='va'>Hisp_4554</span>, <span class='va'>White_2534</span>, <span class='va'>White_3544</span>, <span class='va'>White_4554</span><span class='op'>)</span><span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>year</span><span class='op'>)</span><span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>Black <span class='op'>=</span> <span class='op'>(</span><span class='va'>Black_2534</span><span class='op'>+</span> <span class='va'>Black_3544</span><span class='op'>+</span> <span class='va'>Black_4554</span><span class='op'>)</span><span class='op'>/</span><span class='fl'>3</span>,</span>
+<span>         Hispanic <span class='op'>=</span> <span class='op'>(</span><span class='va'>Hisp_2534</span><span class='op'>+</span> <span class='va'>Hisp_3544</span><span class='op'>+</span> <span class='va'>Hisp_4554</span><span class='op'>)</span><span class='op'>/</span><span class='fl'>3</span>,</span>
+<span>         White <span class='op'>=</span> <span class='op'>(</span><span class='va'>White_2534</span><span class='op'>+</span> <span class='va'>White_3544</span><span class='op'>+</span> <span class='va'>White_4554</span><span class='op'>)</span><span class='op'>/</span><span class='fl'>3</span>,<span class='op'>)</span><span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>year</span>, <span class='va'>Black</span>, <span class='va'>White</span>, <span class='va'>Hispanic</span><span class='op'>)</span> </span>
+<span></span>
+<span><span class='va'>race_compiled</span></span></code></pre>
+</div>
+<pre><code># A tibble: 17 × 4
+# Groups:   year [17]
+    year Black  White Hispanic
+   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
+ 1  1960 0.107 0.0857   0.0929
+ 2  1970 0.122 0.0793   0.0862
+ 3  1980 0.177 0.0966   0.112 
+ 4  1990 0.273 0.137    0.165 
+ 5  2000 0.331 0.174    0.189 
+ 6  2001 0.345 0.175    0.192 
+ 7  2002 0.347 0.178    0.196 
+ 8  2003 0.362 0.181    0.197 
+ 9  2004 0.366 0.185    0.206 
+10  2005 0.373 0.193    0.210 
+11  2006 0.412 0.212    0.235 
+12  2007 0.419 0.217    0.244 
+13  2008 0.430 0.224    0.256 
+14  2009 0.442 0.234    0.270 
+15  2010 0.447 0.238    0.275 
+16  2011 0.457 0.244    0.285 
+17  2012 0.459 0.249    0.290 </code></pre>
+</div>
+<p>As you can see, the modified dataset focuses on the year the data was collected and has three additional colums: “Black”, “White”, and “Hispanic”. I calculated these columns using the original data. For the “Black” column, I found the sum of the proportion of unmarried individuals in each age range (25-34, 35-44, 45-54), and then divided that number by three. I followed the same process for each of the subsequent racial columns as well.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

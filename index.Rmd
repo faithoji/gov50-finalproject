@@ -74,6 +74,8 @@ black <- race_compiled|>
 
 black
 
+knitr::kable(black, digits = 2, col.names = c("Year", "Black Population"))
+
 ggplot(black, aes(x = year, y = Black)) +
 geom_point(color = "black") +
 labs(
@@ -92,6 +94,9 @@ hispanic <- race_compiled|>
 
 hispanic
 
+knitr::kable(hispanic, digits = 2, col.names = c("Year", "Hispanic Population"))
+
+
 ggplot(hispanic, aes(x = year, y = Hispanic)) +
 geom_point(color = "black") +
 labs(
@@ -108,6 +113,9 @@ white <- race_compiled|>
   select(White)
 
 white
+
+knitr::kable(white, digits = 2, col.names = c("Year", "White Population"))
+
 
 ggplot(white, aes(x = year, y = White)) +
 geom_point(color = "black") +

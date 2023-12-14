@@ -6,82 +6,6 @@ output:
   distill::distill_article:
     self_contained: false
 ---
-
-
-
-## Milestone One
-
-Honestly, I'm not exactly sure what I want my final project to be about quite yet. I have a lot of interests in the lasting effects of slavery on systematic racism in the united states, as well as how family histories (in relation to the Slave Trade) influence political activity today. I'm not yet sure, though, about how I would tie this in to my final project. I'd also be interested in how immigration rates affect different aspects in our system. I also potentially could do a project on the prison systems and abolition. I'm just not sure yet what direction I want to go in or how I'd go in that direction.
-
-## Milestone Two
-
-Upon further research, I've decided to completely change the course of my project. I've decided, instead, to do a project surrounding marriage, specifically pulling from a data set in relation to a study called 'Marriage is Not Dead'. My research question is whether or not race has an impact on tendency towards marriage. My hypothesis is that, throughout the years, Black People in America will have the highest proportion of individuals that have never been married. This hypothesis stems from a few points, with the main one being the effect of systematic racism in the United States. It's common knowledge that marriage is very expensive. However, the systems within this country make it disproportionately harder for Black People to acquire and maintain large amounts of wealth, and as such, they would be less likely to take on the financial burden of a wedding. There is also the factor of the prison systems breaking up Black families, which would also contribute to a lower marriage rate. 
-
-My explanatory variables of interest are 'White', 'Black', and 'Hisp', which represent White People, Black or African-American People, and Hispanic People, respectively. These are all different races. The outcome variable of interest would be the proportion of the population that is unmarried per year. This was measured through the survey data, and the trend could be noted through a line graph. An observed pattern in the data that would support this hypothesis would be whether or not the proportion of unmarried Black People was significantly higher than the other races, as well as the overall proportion of unmarried individuals throughout the years. My hypothesis would be disproved if the proportions were similar amongst all the populations, or if a different race had a significantly higher proportion of unmarried individuals. 
-
-Below is a link to the original dataset. 
-https://github.com/fivethirtyeight/data/blob/master/marriage/both_sexes.csv
-
-## Milestone Three
-
-```{r}
-library(tidyverse)
-
-both_sexes <- read_csv("both_sexes.csv")
-
-both_sexes
-```
-
-```{r}
-
-race_compiled <- both_sexes |>
-  select(year, Black_2534, Black_3544, Black_4554, Hisp_2534, Hisp_3544, Hisp_4554, White_2534, White_3544, White_4554)|>
-  group_by(year)|>
-  mutate(Black = (Black_2534+ Black_3544+ Black_4554)/3,
-         Hispanic = (Hisp_2534+ Hisp_3544+ Hisp_4554)/3,
-         White = (White_2534+ White_3544+ White_4554)/3,)|>
-  select(year, Black, White, Hispanic) 
-
-race_compiled
-```
-
-```{r}
-library(ggplot2)
-race_graph <- race_compiled|>
-  ggplot(aes(x = year))+
-  geom_line(aes(y= Black, colour = "Black"))+
-  geom_line(aes(y= White, colour = "White"))+
-  geom_line(aes(y= Hispanic, colour = "Hispanic"))+
-  labs(title = "Unmarried Population Over The Years",
-       x = "Year",
-       y = "Proportion of Unmarried Population",
-       colour = "Legend") +
-  scale_color_manual(name = "Race", values= c("Black"= "deeppink1", "White"= "deepskyblue1", "Hispanic"= "darkorchid1"))
-
-race_graph
-```
-The above graph is the current version of my data visualisation. The three lines correspond with each of the races involved in the study (Black, White, and Hispanic). Though the current legend doesn't include accurate labels, the green line corresponds with the Black population, the red line corresponds with the Hispanic population, and the blue line corresponds with the White population. In future versions of the visualisation, I hope to figure out what's causing the lines to be mislabeled in the legend. However, the data shows an interesting trend that seems to prove the hypothesis that that Black populations have far higher proportions of unmarried people within the populations. It also highlights an upward trend in the unmarried proportion across all populations.  
-
-
-###Milestone Four
-
-```{r}
-race_compiled <- both_sexes |>
-  select(year, Black_2534, Black_3544, Black_4554, Hisp_2534, Hisp_3544, Hisp_4554, White_2534, White_3544, White_4554)|>
-  group_by(year)|>
-  mutate(Black = (Black_2534+ Black_3544+ Black_4554)/3,
-         Hispanic = (Hisp_2534+ Hisp_3544+ Hisp_4554)/3,
-         White = (White_2534+ White_3544+ White_4554)/3,)|>
-  select(year, Black, White, Hispanic) 
-
-race_compiled
-
-knitr::kable(race_compiled, digits = 2, col.names = c("Year", "Black Population", "White Population", "Hispanic Population"))
-
-```
-
-This table is a neat visualisation of the numerical proportions of the unmarried populations over the years. Through this table, it is even easier to note how the Black populations have a drastically larger proportion of unmarried individuals over the years, and over generations, which alludes to the lasting effects of inequality across generations. Additionally, the visualisation from Milestone Three has been updated to include proper labels for the different lines.
-
 ## Introduction
 
 For this project, I decided to explore data relating to marriage rates in America since the 1960s. I specifically wanted to explore the link between the race of American citizens and the effect that that may have on the proportion of the unmarried people within those subsets of the population. I chose this topic because, to be honest, the idea of marriage has always been one that has interested me, specifically the disparities that I had noticed amongst different groups surrounding the perception of how much of their population had found traditional marriages compared to other types of relationships. I wanted to see if these stereotypes had any statistical backing.
@@ -92,7 +16,7 @@ To support my hypothesis, my visualisations would have to show two things. First
 
 ## Data and Research Method
 
-In this project, I had to modify my data set in order to solely show my variables of interest. Originally, the dataset included additional information, such as the region of the individuals, the level of education, employment history, economic status, and the presence of children within the home. While these are important variables that may have an effect on the marruage rates, for the purpose of my project, I wanted to primarily focus on the effect of race on long-term relationships. Additionally, the original data set separated each racial subgroup into three different subgroups, based on age. Because I'm interested in the effects across the whole population, not just by age group, I had to modify the dataset once again to find the means of each of these separations. I pulled the necessary information out of the originsl dataset, 'both_sexes', and compiled it into my unique dataset, 'race_compiled'
+In this project, I had to modify my data set in order to solely show my variables of interest. Originally, the dataset included additional information, such as the region of the individuals, the level of education, employment history, economic status, and the presence of children within the home. While these are important variables that may have an effect on the marriage rates, for the purpose of my project, I wanted to primarily focus on the effect of race on long-term relationships. Additionally, the original data set separated each racial subgroup into three different subgroups, based on age. Because I'm interested in the effects across the whole population, not just by age group, I had to modify the dataset once again to find the means of each of these separations. I pulled the necessary information out of the original dataset, 'both_sexes', and compiled it into my unique dataset, 'race_compiled'. The data present comes from a cross-sectional study. 
 
 # Original Data Set
 ```{r}
@@ -117,4 +41,94 @@ race_compiled <- both_sexes |>
 race_compiled
 ```
 
-As you can see, the modified dataset focuses on the year the data was collected and has three additional colums: "Black", "White", and "Hispanic". I calculated these columns using the original data. For the "Black" column, I found the sum of the proportion of unmarried individuals in each age range (25-34, 35-44, 45-54), and then divided that number by three. I followed the same process for each of the subsequent racial columns as well. 
+As you can see, the modified dataset focuses on the year the data was collected and has three additional columms: "Black", "White", and "Hispanic". I calculated these columns using the original data. For the "Black" column, I found the sum of the proportion of unmarried individuals in each age range (25-34, 35-44, 45-54), and then divided that number by three. I followed the same process for each of the subsequent racial columns as well.
+
+# Data Visualisation
+
+```{r}
+library(ggplot2)
+race_graph <- race_compiled|>
+  ggplot(aes(x = year))+
+  geom_line(aes(y= Black, colour = "Black"))+
+  geom_line(aes(y= White, colour = "White"))+
+  geom_line(aes(y= Hispanic, colour = "Hispanic"))+
+  labs(title = "Proportion of Unmarried Population Over The Years",
+       x = "Year",
+       y = "Proportion of Unmarried Population",
+       colour = "Legend") +
+  scale_color_manual(name = "Race", values= c("Black"= "deeppink1", "White"= "deepskyblue1", "Hispanic"= "darkorchid1"))
+
+race_graph
+
+```
+```{r}
+
+knitr::kable(race_compiled, digits = 2, col.names = c("Year", "Black Population", "White Population", "Hispanic Population"))
+
+```
+
+```{r}
+
+black <- race_compiled|>
+  select(Black)
+
+black
+
+ggplot(black, aes(x = year, y = Black)) +
+geom_point(color = "black") +
+labs(
+x = "Year",
+y = "Unmarried Proportion",
+title = "Unmarried Proportion of Black Population Per Year")+
+geom_smooth(method = "lm", se = FALSE, color = "deeppink1", size = 1.5)
+
+black_fit <- lm(Black ~ year, data = black)
+black_fit
+```
+
+```{r}
+hispanic <- race_compiled|>
+  select(Hispanic)
+
+hispanic
+
+ggplot(hispanic, aes(x = year, y = Hispanic)) +
+geom_point(color = "black") +
+labs(
+x = "Year",
+y = "Unmarried Proportion",
+title = "Unmarried Proportion of Hispanic Population Per Year")+
+geom_smooth(method = "lm", se = FALSE, color = "darkorchid1", size = 1.5)
+
+hispanic_fit <- lm(Hispanic ~ year, data = hispanic)
+hispanic_fit
+```
+```{r}
+white <- race_compiled|>
+  select(White)
+
+white
+
+ggplot(white, aes(x = year, y = White)) +
+geom_point(color = "black") +
+labs(
+x = "Year",
+y = "Unmarried Proportion",
+title = "Unmarried Proportion of White Population Per Year")+
+geom_smooth(method = "lm", se = FALSE, color = "deepskyblue1", size = 1.5)
+
+white_fit <- lm(White ~ year, data = white)
+white_fit
+```
+
+## Results
+
+The above visualisations show two major aspects. Firstly, both the line graph and the table prove that there is a notable difference between the proportions of unmarried populations. The graph shows the pink line, which corresponds with the Black population, consistently being above the lines corresponding with the other two racial groups. This is further supported by the table, which, in each year, has the highest value in the leftmost column, which corresponds with the Black population.
+
+Furthermore, the graph shows an interesting trend. While the proportions of the Hispanic and White populations' proportions remain relatively close to one another, having a maximum difference of four percentage points in 2009, 2011, and 2012, the difference between those to populations and the Black population grows exponentially over the years. What started as a two percentage point difference in 1960 grew to close to a twenty percentage point difference by 2012. The trend of the graph also suggests that this increase would continue past the scope of the study.
+
+When looking at the regressions, it is even clearer that the proportion of the unmarried Black population is drastically different in comparison to that of the other two populations. The coefficients in each of the broken down scatterplots are representative of how much the proportion of unmarried individuals in the population increased per year. For both the White and Hispanic populations, that number was relatively the same, with both having a coefficient of approximately .003. However, the coefficient when concerning the Black population was over twice that figure, at approximately.007. However, based on the nature of the study, there isn't enough evidence to claim this to be a causal effect. However, there is a strong correlation.
+
+## Conclusion
+
+In conclusion, there is a strong correlation between race and the proportion of the population that is unmarried. When it came to the Black population, a significantly higher proportion of the population was unmarried than in any of the other populations. The line graph was most useful at showing the sheer difference between the population proportions, but the regression lines assisted in clarifying that race also has an effect on the growth of the unmarried proportions in these populations. There are quite a few limitations in this dataset, as it doesn't include all possible age groups of married individuals, doesn't include information about potential confounders, and doesn't include information about other races. A way to improve this study would be to collect that information to form a better understanding of the issue. 
